@@ -1,0 +1,35 @@
+# === Backend (Java / Maven) ===
+backend/target/
+backend/*.jar
+backend/*.war
+backend/*.class
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# === Frontend (Node / Vite) ===
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# === IDEs ===
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Logs ===
+*.log
+
+# === Environment / Credenciais ===
+.env
+.env.local
+backend/src/main/resources/application.properties
