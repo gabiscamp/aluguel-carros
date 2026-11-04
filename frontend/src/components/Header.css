@@ -1,0 +1,143 @@
+.header {
+  height: var(--header-height);
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  z-index: 100;
+}
+
+.header-left h2 {
+  font-size: 1rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.header-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-email {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--gray-800);
+}
+
+.header-role-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.role-cliente {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.role-agente {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.btn-logout {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--gray-50);
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  border: 1px solid var(--gray-200);
+}
+
+.btn-logout:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.hamburger-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  font-size: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hamburger-btn:hover {
+  background: var(--gray-100);
+}
+
+@media (max-width: 768px) {
+  .header {
+    left: 0;
+    padding: 0 16px;
+  }
+
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-user-info {
+    display: none;
+  }
+
+  .header-right {
+    gap: 12px;
+  }
+}

@@ -71,15 +71,16 @@ public class PedidoController {
 
     @PutMapping("/{id}/aprovar")
     public ResponseEntity<PedidoDTO> aprovar(@PathVariable Long id,
+                                              @RequestBody(required = false) Map<String, String> body,
                                               @AuthenticationPrincipal Usuario usuario) {
         return ResponseEntity.ok(pedidoService.aprovar(id, usuario.getId()));
     }
 
     @PutMapping("/{id}/rejeitar")
     public ResponseEntity<PedidoDTO> rejeitar(@PathVariable Long id,
-                                               @RequestBody Map<String, String> body,
+                                               @RequestBody(required = false) Map<String, String> body,
                                                @AuthenticationPrincipal Usuario usuario) {
-        String motivo = body.getOrDefault("motivo", "Pedido rejeitado");
+        String motivo = body != null ? body.getOrDefault("motivo", "Pedido rejeitado") : "Pedido rejeitado";
         return ResponseEntity.ok(pedidoService.rejeitar(id, usuario.getId(), motivo));
     }
 }

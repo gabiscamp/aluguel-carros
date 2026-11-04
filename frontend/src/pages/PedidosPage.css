@@ -1,0 +1,21 @@
+.pedidos-page .table-container {
+  overflow-x: auto;
+}
+
+.pedidos-page .actions-cell {
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .pedidos-page .table-container th,
+  .pedidos-page .table-container td {
+    padding: 10px 12px;
+    font-size: 0.8125rem;
+  }
+
+  .pedidos-page .modal {
+    width: 95%;
+    max-width: 600px;
+    padding: 24px 18px;
+  }
+}

@@ -1,0 +1,17 @@
+.automoveis-page .table-container {
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .automoveis-page .table-container th,
+  .automoveis-page .table-container td {
+    padding: 10px 12px;
+    font-size: 0.8125rem;
+  }
+
+  .automoveis-page .modal {
+    width: 95%;
+    max-width: 600px;
+    padding: 24px 18px;
+  }
+}
