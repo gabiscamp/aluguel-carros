@@ -31,10 +31,11 @@
 }
 
 .sidebar-title {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 400;
   color: #fff;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
+  font-family: 'Racing Sans One', cursive;
 }
 
 .sidebar-subtitle {
