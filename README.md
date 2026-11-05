@@ -437,7 +437,7 @@ curl -X POST http://localhost:8080/api/pedidos \
 
 | Nome | GitHub |
 |------|--------|
-| Gabriela Campelo | [@seu-usuario](https://github.com/gabiscamp) |
+| Gabriela Campelo | [@gabiscamp](https://github.com/gabiscamp) |
 
 ---
 
