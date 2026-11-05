@@ -32,4 +32,3 @@ desktop.ini
 # === Environment / Credenciais ===
 .env
 .env.local
-backend/src/main/resources/application.properties
