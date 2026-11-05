@@ -34,7 +34,7 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  padding: 48px 44px;
+  padding: 52px 48px;
   width: 100%;
   max-width: 420px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
@@ -69,9 +69,16 @@
   letter-spacing: -0.03em;
 }
 
-.login-header p {
+.login-header p,
+.login-subtitle {
   color: var(--gray-500);
   font-size: 0.9rem;
+}
+
+.login-description {
+  color: var(--gray-400);
+  font-size: 0.825rem;
+  margin-top: 6px;
 }
 
 .login-btn {

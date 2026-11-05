@@ -50,6 +50,12 @@ export default function Sidebar({ isOpen, onClose }) {
           </NavLink>
         ))}
       </nav>
+      <div className="sidebar-extras">
+        <NavLink to="/design" onClick={onClose} className="sidebar-link sidebar-link-muted">
+          <span className="sidebar-icon">📐</span>
+          <span>Design System</span>
+        </NavLink>
+      </div>
       <div className="sidebar-footer">
         <small>AutoRent &copy; 2024 - Todos os direitos reservados</small>
       </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { clienteService } from '../services/clienteService';
+import { maskCPF, maskCEP } from '../utils/masks';
 import './PerfilPage.css';
 
 export default function PerfilPage() {
@@ -8,9 +9,15 @@ export default function PerfilPage() {
   const [perfil, setPerfil] = useState(null);
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({});
+  const [cep, setCep] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
+
+  const showMsg = (type, text) => {
+    setMessage({ type, text });
+    setTimeout(() => setMessage({ type: '', text: '' }), 4000);
+  };
 
   useEffect(() => {
     loadPerfil();
@@ -26,7 +33,7 @@ export default function PerfilPage() {
       setPerfil(res.data);
       setForm(res.data);
     } catch {
-      setMessage({ type: 'error', text: 'Erro ao carregar perfil.' });
+      showMsg('error', 'Erro ao carregar perfil.');
     } finally {
       setLoading(false);
     }
@@ -34,6 +41,21 @@ export default function PerfilPage() {
 
   const handleChange = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleCEP = async (rawCep) => {
+    const masked = maskCEP(rawCep);
+    setCep(masked);
+    const cleanCEP = masked.replace(/\D/g, '');
+    if (cleanCEP.length === 8) {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
+        const data = await res.json();
+        if (!data.erro) {
+          handleChange('endereco', `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`);
+        }
+      } catch {}
+    }
   };
 
   const handleEmpregadorChange = (index, field, value) => {
@@ -72,9 +94,9 @@ export default function PerfilPage() {
       const res = await clienteService.update(user.id, payload);
       setPerfil(res.data);
       setEditing(false);
-      setMessage({ type: 'success', text: 'Perfil atualizado com sucesso!' });
+      showMsg('success', 'Perfil atualizado com sucesso!');
     } catch (err) {
-      setMessage({ type: 'error', text: err.response?.data?.message || 'Erro ao salvar perfil.' });
+      showMsg('error', err.response?.data?.message || 'Erro ao salvar perfil.');
     } finally {
       setSaving(false);
     }
@@ -107,7 +129,7 @@ export default function PerfilPage() {
       <div className="page-header">
         <h1>Meu Perfil</h1>
         {!editing && (
-          <button className="btn btn-primary" onClick={() => setEditing(true)}>
+          <button className="btn btn-primary" onClick={() => { setMessage({ type: '', text: '' }); setEditing(true); }}>
             Editar Perfil
           </button>
         )}
@@ -131,7 +153,7 @@ export default function PerfilPage() {
               <input
                 type="text"
                 value={form.cpf || ''}
-                onChange={(e) => handleChange('cpf', e.target.value)}
+                onChange={(e) => handleChange('cpf', maskCPF(e.target.value))}
                 disabled={!editing}
                 placeholder="000.000.000-00"
               />
@@ -159,12 +181,13 @@ export default function PerfilPage() {
           </div>
           <div className="form-row">
             <div className="form-group">
-              <label>Endereço</label>
+              <label>CEP</label>
               <input
                 type="text"
-                value={form.endereco || ''}
-                onChange={(e) => handleChange('endereco', e.target.value)}
+                value={cep}
+                onChange={(e) => handleCEP(e.target.value)}
                 disabled={!editing}
+                placeholder="00000-000"
               />
             </div>
             <div className="form-group">
@@ -177,6 +200,16 @@ export default function PerfilPage() {
                 step="0.01"
               />
             </div>
+          </div>
+          <div className="form-group">
+            <label>Endereço</label>
+            <input
+              type="text"
+              value={form.endereco || ''}
+              onChange={(e) => handleChange('endereco', e.target.value)}
+              disabled={!editing}
+              placeholder="Rua, bairro, cidade - UF"
+            />
           </div>
         </div>
 

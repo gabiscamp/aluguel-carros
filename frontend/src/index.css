@@ -91,6 +91,164 @@ img {
   --transition: all 0.2s ease;
 }
 
+/* ===== Dark Mode Variables ===== */
+body.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body.dark .header {
+  background: var(--bg-secondary);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .header-left h2 {
+  color: var(--text-secondary);
+}
+
+body.dark .header-email {
+  color: var(--text-primary);
+}
+
+body.dark .btn-logout {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+body.dark .btn-logout:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+body.dark .hamburger-btn {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+body.dark .card,
+body.dark .table-container,
+body.dark .modal {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+body.dark .table-container thead {
+  background: var(--bg-primary);
+}
+
+body.dark .table-container th {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .table-container td {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .table-container tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.3);
+}
+
+body.dark .table-container tbody tr:hover {
+  background: rgba(99, 102, 241, 0.1);
+}
+
+body.dark .form-group label {
+  color: var(--text-secondary);
+}
+
+body.dark .form-group input,
+body.dark .form-group select,
+body.dark .form-group textarea {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark .form-group input::placeholder {
+  color: var(--gray-500);
+}
+
+body.dark .form-group input:disabled,
+body.dark .form-group select:disabled,
+body.dark .form-group textarea:disabled {
+  background: var(--bg-secondary);
+  color: var(--gray-500);
+}
+
+body.dark .btn-outline {
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark .btn-outline:hover {
+  background: var(--bg-primary);
+  border-color: var(--gray-500);
+}
+
+body.dark .page-header h1 {
+  color: var(--text-primary);
+}
+
+body.dark .empty-state h3 {
+  color: var(--text-secondary);
+}
+
+body.dark .modal-actions {
+  border-top-color: var(--border-color);
+}
+
+body.dark .modal h2 {
+  color: var(--text-primary);
+}
+
+body.dark .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Theme toggle button */
+.btn-theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--gray-50);
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+}
+
+.btn-theme-toggle:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+body.dark .btn-theme-toggle {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+body.dark .btn-theme-toggle:hover {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
 /* Toast notifications */
 .toast-container {
   position: fixed;

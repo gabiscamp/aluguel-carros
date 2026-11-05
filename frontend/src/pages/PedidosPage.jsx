@@ -47,6 +47,11 @@ export default function PedidosPage() {
   const [showRejeitar, setShowRejeitar] = useState(null);
   const [motivoRejeicao, setMotivoRejeicao] = useState('');
 
+  const showMsg = (type, text) => {
+    setMessage({ type, text });
+    setTimeout(() => setMessage({ type: '', text: '' }), 4000);
+  };
+
   useEffect(() => { loadData(); }, []);
 
   const loadData = async () => {
@@ -58,7 +63,7 @@ export default function PedidosPage() {
       setPedidos(Array.isArray(pedidosRes.data) ? pedidosRes.data : []);
       setAutomoveis(Array.isArray(automoveisRes.data) ? automoveisRes.data : []);
     } catch {
-      setMessage({ type: 'error', text: 'Erro ao carregar dados.' });
+      showMsg('error', 'Erro ao carregar dados.');
     } finally {
       setLoading(false);
     }
@@ -72,12 +77,12 @@ export default function PedidosPage() {
         ...createForm,
         automovelId: Number(createForm.automovelId)
       });
-      setMessage({ type: 'success', text: 'Pedido criado com sucesso!' });
+      showMsg('success', 'Pedido criado com sucesso!');
       setShowCreate(false);
       setCreateForm({ automovelId: '', dataInicio: '', dataFim: '' });
       loadData();
     } catch (err) {
-      setMessage({ type: 'error', text: err.response?.data?.message || 'Erro ao criar pedido.' });
+      showMsg('error', err.response?.data?.message || 'Erro ao criar pedido.');
     } finally {
       setSaving(false);
     }
@@ -87,12 +92,12 @@ export default function PedidosPage() {
     setSaving(true);
     try {
       await pedidoService.avaliar(showAvaliar, parecerFinanceiro);
-      setMessage({ type: 'success', text: 'Pedido avaliado com sucesso!' });
+      showMsg('success', 'Pedido avaliado com sucesso!');
       setShowAvaliar(null);
       setParecerFinanceiro('');
       loadData();
     } catch (err) {
-      setMessage({ type: 'error', text: err.response?.data?.message || 'Erro ao avaliar.' });
+      showMsg('error', err.response?.data?.message || 'Erro ao avaliar.');
     } finally {
       setSaving(false);
     }
@@ -106,12 +111,12 @@ export default function PedidosPage() {
         valorMensal: Number(aprovarForm.valorMensal),
         prazoMeses: Number(aprovarForm.prazoMeses),
       });
-      setMessage({ type: 'success', text: 'Pedido aprovado com sucesso!' });
+      showMsg('success', 'Pedido aprovado com sucesso!');
       setShowAprovar(null);
       setAprovarForm({ tipoContrato: 'CLIENTE', valorMensal: '', prazoMeses: '' });
       loadData();
     } catch (err) {
-      setMessage({ type: 'error', text: err.response?.data?.message || 'Erro ao aprovar.' });
+      showMsg('error', err.response?.data?.message || 'Erro ao aprovar.');
     } finally {
       setSaving(false);
     }
@@ -121,12 +126,12 @@ export default function PedidosPage() {
     setSaving(true);
     try {
       await pedidoService.rejeitar(showRejeitar, motivoRejeicao);
-      setMessage({ type: 'success', text: 'Pedido rejeitado.' });
+      showMsg('success', 'Pedido rejeitado.');
       setShowRejeitar(null);
       setMotivoRejeicao('');
       loadData();
     } catch (err) {
-      setMessage({ type: 'error', text: err.response?.data?.message || 'Erro ao rejeitar.' });
+      showMsg('error', err.response?.data?.message || 'Erro ao rejeitar.');
     } finally {
       setSaving(false);
     }
@@ -136,10 +141,10 @@ export default function PedidosPage() {
     if (!window.confirm('Tem certeza que deseja cancelar este pedido?')) return;
     try {
       await pedidoService.cancelar(id);
-      setMessage({ type: 'success', text: 'Pedido cancelado.' });
+      showMsg('success', 'Pedido cancelado.');
       loadData();
     } catch {
-      setMessage({ type: 'error', text: 'Erro ao cancelar pedido.' });
+      showMsg('error', 'Erro ao cancelar pedido.');
     }
   };
 
@@ -150,7 +155,7 @@ export default function PedidosPage() {
       <div className="page-header">
         <h1>{isAgente ? 'Pedidos' : 'Meus Pedidos'}</h1>
         {!isAgente && (
-          <button className="btn btn-primary" onClick={() => setShowCreate(true)}>
+          <button className="btn btn-primary" onClick={() => { setMessage({ type: '', text: '' }); setShowCreate(true); }}>
             + Novo Pedido
           </button>
         )}
@@ -187,16 +192,16 @@ export default function PedidosPage() {
                   <td>{statusBadge(p.status)}</td>
                   <td className="actions-cell">
                     {isAgente && p.status === 'PENDENTE' && (
-                      <button className="btn btn-outline btn-sm" onClick={() => { setShowAvaliar(p.id); setParecerFinanceiro(''); }}>
+                      <button className="btn btn-outline btn-sm" onClick={() => { setMessage({ type: '', text: '' }); setShowAvaliar(p.id); setParecerFinanceiro(''); }}>
                         Avaliar
                       </button>
                     )}
                     {isAgente && p.status === 'EM_ANALISE' && (
                       <>
-                        <button className="btn btn-success btn-sm" onClick={() => { setShowAprovar(p.id); setAprovarForm({ tipoContrato: 'CLIENTE', valorMensal: '', prazoMeses: '' }); }}>
+                        <button className="btn btn-success btn-sm" onClick={() => { setMessage({ type: '', text: '' }); setShowAprovar(p.id); setAprovarForm({ tipoContrato: 'CLIENTE', valorMensal: '', prazoMeses: '' }); }}>
                           Aprovar
                         </button>
-                        <button className="btn btn-danger btn-sm" onClick={() => { setShowRejeitar(p.id); setMotivoRejeicao(''); }}>
+                        <button className="btn btn-danger btn-sm" onClick={() => { setMessage({ type: '', text: '' }); setShowRejeitar(p.id); setMotivoRejeicao(''); }}>
                           Rejeitar
                         </button>
                       </>

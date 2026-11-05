@@ -8,12 +8,14 @@ import PerfilPage from './pages/PerfilPage';
 import AutomoveisPage from './pages/AutomoveisPage';
 import PedidosPage from './pages/PedidosPage';
 import ContratosPage from './pages/ContratosPage';
+import DesignSystemPage from './pages/DesignSystemPage';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/design" element={<DesignSystemPage />} />
       <Route
         path="/"
         element={

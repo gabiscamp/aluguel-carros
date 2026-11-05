@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { automovelService } from '../services/automovelService';
+import { maskPlaca } from '../utils/masks';
 import './AutomoveisPage.css';
 
 const emptyForm = {
@@ -18,6 +19,11 @@ export default function AutomoveisPage() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
 
+  const showMsg = (type, text) => {
+    setMessage({ type, text });
+    setTimeout(() => setMessage({ type: '', text: '' }), 4000);
+  };
+
   useEffect(() => { loadData(); }, []);
 
   const loadData = async () => {
@@ -25,7 +31,7 @@ export default function AutomoveisPage() {
       const res = await automovelService.getAll();
       setAutomoveis(Array.isArray(res.data) ? res.data : []);
     } catch {
-      setMessage({ type: 'error', text: 'Erro ao carregar automóveis.' });
+      showMsg('error', 'Erro ao carregar automóveis.');
     } finally {
       setLoading(false);
     }
@@ -34,6 +40,7 @@ export default function AutomoveisPage() {
   const openCreate = () => {
     setForm(emptyForm);
     setEditingId(null);
+    setMessage({ type: '', text: '' });
     setShowModal(true);
   };
 
@@ -46,6 +53,7 @@ export default function AutomoveisPage() {
       placa: auto.placa || '',
     });
     setEditingId(auto.id);
+    setMessage({ type: '', text: '' });
     setShowModal(true);
   };
 
@@ -62,15 +70,15 @@ export default function AutomoveisPage() {
       };
       if (editingId) {
         await automovelService.update(editingId, payload);
-        setMessage({ type: 'success', text: 'Automóvel atualizado com sucesso!' });
+        showMsg('success', 'Automóvel atualizado com sucesso!');
       } else {
         await automovelService.create(payload);
-        setMessage({ type: 'success', text: 'Automóvel cadastrado com sucesso!' });
+        showMsg('success', 'Automóvel cadastrado com sucesso!');
       }
       setShowModal(false);
       loadData();
     } catch (err) {
-      setMessage({ type: 'error', text: err.response?.data?.message || 'Erro ao salvar.' });
+      showMsg('error', err.response?.data?.message || 'Erro ao salvar.');
     } finally {
       setSaving(false);
     }
@@ -80,10 +88,10 @@ export default function AutomoveisPage() {
     if (!window.confirm('Tem certeza que deseja excluir este automóvel?')) return;
     try {
       await automovelService.remove(id);
-      setMessage({ type: 'success', text: 'Automóvel excluído com sucesso!' });
+      showMsg('success', 'Automóvel excluído com sucesso!');
       loadData();
     } catch {
-      setMessage({ type: 'error', text: 'Erro ao excluir automóvel.' });
+      showMsg('error', 'Erro ao excluir automóvel.');
     }
   };
 
@@ -183,7 +191,7 @@ export default function AutomoveisPage() {
               </div>
               <div className="form-group">
                 <label>Placa</label>
-                <input value={form.placa} onChange={(e) => handleChange('placa', e.target.value)} placeholder="ABC-1234" />
+                <input value={form.placa} onChange={(e) => handleChange('placa', maskPlaca(e.target.value))} placeholder="ABC-1234" />
               </div>
             </div>
             <div className="modal-actions">

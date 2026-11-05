@@ -18,6 +18,11 @@ export default function ContratosPage() {
   const [creditForm, setCreditForm] = useState({ taxaJuros: '', valorFinanciado: '', numeroParcelas: '' });
   const [saving, setSaving] = useState(false);
 
+  const showMsg = (type, text) => {
+    setMessage({ type, text });
+    setTimeout(() => setMessage({ type: '', text: '' }), 4000);
+  };
+
   useEffect(() => { loadData(); }, []);
 
   const loadData = async () => {
@@ -25,7 +30,7 @@ export default function ContratosPage() {
       const res = await contratoService.getAll();
       setContratos(Array.isArray(res.data) ? res.data : []);
     } catch {
-      setMessage({ type: 'error', text: 'Erro ao carregar contratos.' });
+      showMsg('error', 'Erro ao carregar contratos.');
     } finally {
       setLoading(false);
     }
@@ -39,7 +44,7 @@ export default function ContratosPage() {
       const res = await contratoService.getById(id);
       setDetail(res.data);
     } catch {
-      setMessage({ type: 'error', text: 'Erro ao carregar detalhes.' });
+      showMsg('error', 'Erro ao carregar detalhes.');
       setDetailId(null);
     } finally {
       setLoadingDetail(false);
@@ -56,12 +61,12 @@ export default function ContratosPage() {
         numeroParcelas: Number(creditForm.numeroParcelas),
         agenteBancoId: user.id
       });
-      setMessage({ type: 'success', text: 'Crédito associado com sucesso!' });
+      showMsg('success', 'Crédito associado com sucesso!');
       setShowCredit(null);
       setCreditForm({ taxaJuros: '', valorFinanciado: '', numeroParcelas: '' });
       loadData();
     } catch (err) {
-      setMessage({ type: 'error', text: err.response?.data?.message || 'Erro ao associar crédito.' });
+      showMsg('error', err.response?.data?.message || 'Erro ao associar crédito.');
     } finally {
       setSaving(false);
     }
@@ -112,7 +117,7 @@ export default function ContratosPage() {
                         {detailId === c.id ? 'Fechar' : 'Detalhes'}
                       </button>
                       {isAgente && (
-                        <button className="btn btn-primary btn-sm" onClick={() => { setShowCredit(c.id); setCreditForm({ taxaJuros: '', valorFinanciado: '', numeroParcelas: '' }); }}>
+                        <button className="btn btn-primary btn-sm" onClick={() => { setMessage({ type: '', text: '' }); setShowCredit(c.id); setCreditForm({ taxaJuros: '', valorFinanciado: '', numeroParcelas: '' }); }}>
                           Associar Crédito
                         </button>
                       )}

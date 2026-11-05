@@ -19,7 +19,7 @@
 
 ## Status do Projeto
 
-![Java](https://img.shields.io/badge/Java-21-007ec6?style=for-the-badge&logo=openjdk&logoColor=white) ![Maven](https://img.shields.io/badge/Maven-3.9.9-007ec6?style=for-the-badge&logo=apachemaven&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.1-007ec6?style=for-the-badge&logo=springboot&logoColor=white) ![React](https://img.shields.io/badge/React-18-007ec6?style=for-the-badge&logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-5-007ec6?style=for-the-badge&logo=vite&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-007ec6?style=for-the-badge&logo=supabase&logoColor=white)
+![Java](https://img.shields.io/badge/Java-25-007ec6?style=for-the-badge&logo=openjdk&logoColor=white) ![Maven](https://img.shields.io/badge/Maven-3.9.9-007ec6?style=for-the-badge&logo=apachemaven&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.0.0-007ec6?style=for-the-badge&logo=springboot&logoColor=white) ![React](https://img.shields.io/badge/React-18-007ec6?style=for-the-badge&logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-5-007ec6?style=for-the-badge&logo=vite&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-007ec6?style=for-the-badge&logo=supabase&logoColor=white)
 
 ---
 
@@ -78,8 +78,8 @@ O objetivo é construir um sistema web completo para gestão de aluguéis de aut
 
 | Tecnologia | Versão | Finalidade |
 |------------|--------|------------|
-| Java (JDK) | 21 | Linguagem principal |
-| Spring Boot | 3.4.1 | Framework back-end |
+| Java (JDK) | 25 | Linguagem principal |
+| Spring Boot | 4.0.0 | Framework back-end |
 | Spring Security | 6.x | Autenticação e autorização |
 | Spring Data JPA | 3.x | Persistência de dados |
 | Apache Maven | 3.9.9 | Build e dependências |
@@ -198,7 +198,7 @@ As 20 histórias de usuário com critérios de aceitação estão em: **[docs/hi
 
 | Ferramenta | Versão | Necessário para |
 |------------|--------|----------------|
-| Java JDK | 21 ou superior | Back-end Spring Boot |
+| Java JDK | 25 | Back-end Spring Boot |
 | Apache Maven | 3.9.x | Build do back-end |
 | Node.js | 18.x ou superior | Front-end React |
 | npm | 9.x ou superior | Gerenciador de pacotes |
@@ -369,14 +369,12 @@ aluguel-carros/
 
 | Tela | Captura de Tela |
 | :---: | :---: |
-| **Tela de Login** | **Tela de Cadastro** |
-| *Screenshot aqui* | *Screenshot aqui* |
-| **Dashboard (Cliente)** | **Dashboard (Agente)** |
-| *Screenshot aqui* | *Screenshot aqui* |
-| **Perfil do Cliente** | **Automóveis** |
-| *Screenshot aqui* | *Screenshot aqui* |
-| **Pedidos de Aluguel** | **Contratos** |
-| *Screenshot aqui* | *Screenshot aqui* |
+| **Dashboard (Agente)** | **Gestão de Automóveis** |
+| ![Dashboard Agente](docs/screenshots/01-dashboard-agente.png) | ![Automóveis](docs/screenshots/02-automoveis.png) |
+| **Pedidos (Visão Agente)** | **Contratos** |
+| ![Pedidos Agente](docs/screenshots/03-pedidos-agente.png) | ![Contratos](docs/screenshots/04-contratos.png) |
+| **Meus Pedidos (Visão Cliente)** | |
+| ![Pedidos Cliente](docs/screenshots/05-pedidos-cliente.png) | |
 
 ### Exemplo de Saída da API
 
@@ -439,7 +437,7 @@ curl -X POST http://localhost:8080/api/pedidos \
 
 | Nome | GitHub |
 |------|--------|
-| Gabriela Campelo | [@seu-usuario](https://github.com/seu-usuario) |
+| Gabriela Campelo | [@seu-usuario](https://github.com/gabiscamp) |
 
 ---
 

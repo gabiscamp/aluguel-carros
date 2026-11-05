@@ -1,13 +1,14 @@
+/* ===== Welcome Banner ===== */
 .welcome-banner {
   margin-bottom: 32px;
-  background: linear-gradient(135deg, #6366f1 0%, #7c3aed 50%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 50%, #a78bfa 100%);
   color: #fff;
   border-radius: var(--radius-xl);
-  padding: 36px 40px;
+  padding: 40px 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 24px rgba(99, 102, 241, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -15,38 +16,136 @@
 .welcome-banner::before {
   content: '';
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 240px;
+  height: 240px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 50%;
-  top: -80px;
+  top: -100px;
   right: 60px;
 }
 
+.welcome-banner::after {
+  content: '';
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  bottom: -60px;
+  left: 40px;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 1;
+}
+
 .welcome-content h2 {
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   margin-bottom: 8px;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .welcome-content p {
-  opacity: 0.85;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  opacity: 0.88;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+.role-badge {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 14px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(4px);
 }
 
 .welcome-decoration {
-  font-size: 4rem;
-  opacity: 0.3;
+  font-size: 5rem;
+  opacity: 0.25;
   position: relative;
   z-index: 1;
 }
 
+/* ===== Steps Section ===== */
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.steps-section {
+  margin-bottom: 32px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  position: relative;
+}
+
+.step-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.step-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.step-card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-bottom: 8px;
+}
+
+.step-card p {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  line-height: 1.5;
+}
+
+/* ===== Stats Grid ===== */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  margin-bottom: 32px;
 }
 
 .stat-card {
@@ -56,6 +155,7 @@
   overflow: hidden;
   transition: var(--transition);
   cursor: default;
+  border-left: 4px solid transparent;
 }
 
 .stat-card:hover {
@@ -63,14 +163,11 @@
   box-shadow: var(--shadow-lg);
 }
 
-.stat-accent {
-  height: 3px;
-}
-
-.stat-accent-blue { background: linear-gradient(90deg, var(--primary), #818cf8); }
-.stat-accent-yellow { background: linear-gradient(90deg, var(--warning), #fbbf24); }
-.stat-accent-green { background: linear-gradient(90deg, var(--success), #34d399); }
-.stat-accent-purple { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.stat-border-blue { border-left-color: var(--primary); }
+.stat-border-yellow { border-left-color: var(--warning); }
+.stat-border-orange { border-left-color: #f97316; }
+.stat-border-green { border-left-color: var(--success); }
+.stat-border-purple { border-left-color: #8b5cf6; }
 
 .stat-body {
   padding: 24px;
@@ -92,6 +189,7 @@
 
 .stat-icon-blue { background: var(--primary-light); }
 .stat-icon-yellow { background: var(--warning-light); }
+.stat-icon-orange { background: #fff7ed; }
 .stat-icon-green { background: var(--success-light); }
 .stat-icon-purple { background: #f5f3ff; }
 
@@ -115,6 +213,94 @@
   font-weight: 500;
 }
 
+/* ===== Quick Actions ===== */
+.quick-actions {
+  margin-bottom: 20px;
+}
+
+.actions-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.action-btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.action-btn-primary:hover { background: var(--primary-dark); }
+
+.action-btn-success {
+  background: var(--success);
+  color: #fff;
+}
+.action-btn-success:hover { background: #059669; }
+
+.action-btn-warning {
+  background: var(--warning);
+  color: #fff;
+}
+.action-btn-warning:hover { background: #d97706; }
+
+.action-btn-purple {
+  background: #8b5cf6;
+  color: #fff;
+}
+.action-btn-purple:hover { background: #7c3aed; }
+
+/* ===== Dark Mode ===== */
+body.dark .section-title {
+  color: var(--text-primary);
+}
+
+body.dark .step-card {
+  background: var(--bg-card);
+}
+
+body.dark .step-card h4 {
+  color: var(--text-primary);
+}
+
+body.dark .step-card p {
+  color: var(--text-secondary);
+}
+
+body.dark .stat-card {
+  background: var(--bg-card);
+}
+
+body.dark .stat-number {
+  color: var(--text-primary);
+}
+
+body.dark .stat-label {
+  color: var(--text-secondary);
+}
+
+body.dark .action-btn {
+  box-shadow: none;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .welcome-banner {
     padding: 24px 20px;
@@ -124,19 +310,32 @@
   }
 
   .welcome-content h2 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .welcome-content p {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
   }
 
   .welcome-decoration {
-    font-size: 2.5rem;
+    font-size: 3rem;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
   }
 
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  .actions-row {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .stat-number {
@@ -146,6 +345,10 @@
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }

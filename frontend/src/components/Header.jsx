@@ -1,8 +1,10 @@
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import './Header.css';
 
 export default function Header({ onMenuToggle }) {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const initials = user?.email?.charAt(0).toUpperCase() || '?';
   const isCliente = user?.tipo === 'CLIENTE';
@@ -27,6 +29,9 @@ export default function Header({ onMenuToggle }) {
             </span>
           </div>
         </div>
+        <button className="btn-theme-toggle" onClick={toggleTheme} title={theme === 'light' ? 'Modo escuro' : 'Modo claro'}>
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
         <button className="btn-logout" onClick={logout} title="Sair do sistema">
           ⏻
         </button>

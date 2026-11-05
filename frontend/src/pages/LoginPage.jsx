@@ -31,7 +31,8 @@ export default function LoginPage() {
         <div className="login-header">
           <span className="login-logo">🚗</span>
           <h1>AutoRent</h1>
-          <p>Sistema de Aluguel de Carros</p>
+          <p className="login-subtitle">Sistema de Aluguel de Carros</p>
+          <p className="login-description">Faça login para acessar o sistema</p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">

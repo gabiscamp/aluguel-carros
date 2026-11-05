@@ -90,6 +90,30 @@
   text-decoration: underline;
 }
 
+.register-divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 16px;
+  gap: 12px;
+}
+
+.register-divider::before,
+.register-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gray-200);
+}
+
+.register-divider span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray-400);
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .register-card {
     width: 90%;

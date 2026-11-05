@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { maskCPF, maskCNPJ, maskCEP } from '../utils/masks';
 import './RegisterPage.css';
 
 export default function RegisterPage() {
@@ -10,6 +11,7 @@ export default function RegisterPage() {
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [rg, setRg] = useState('');
+  const [cep, setCep] = useState('');
   const [endereco, setEndereco] = useState('');
   const [razaoSocial, setRazaoSocial] = useState('');
   const [cnpj, setCnpj] = useState('');
@@ -19,6 +21,21 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
+
+  const handleCEP = async (rawCep) => {
+    const masked = maskCEP(rawCep);
+    setCep(masked);
+    const cleanCEP = masked.replace(/\D/g, '');
+    if (cleanCEP.length === 8) {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
+        const data = await res.json();
+        if (!data.erro) {
+          setEndereco(`${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`);
+        }
+      } catch {}
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,6 +80,9 @@ export default function RegisterPage() {
               <option value="AGENTE">Agente</option>
             </select>
           </div>
+
+          <div className="register-divider"><span>Credenciais</span></div>
+
           <div className="form-group">
             <label>Email</label>
             <input
@@ -79,19 +99,21 @@ export default function RegisterPage() {
               type="password"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
-              placeholder="Crie uma senha"
+              placeholder="Crie uma senha segura"
               required
             />
           </div>
+
           {tipo === 'CLIENTE' && (
             <>
+              <div className="register-divider"><span>Dados Pessoais</span></div>
               <div className="form-group">
                 <label>Nome Completo</label>
                 <input
                   type="text"
                   value={nome}
                   onChange={(e) => setNome(e.target.value)}
-                  placeholder="Seu nome completo"
+                  placeholder="Digite seu nome completo"
                   required
                 />
               </div>
@@ -100,7 +122,7 @@ export default function RegisterPage() {
                 <input
                   type="text"
                   value={cpf}
-                  onChange={(e) => setCpf(e.target.value)}
+                  onChange={(e) => setCpf(maskCPF(e.target.value))}
                   placeholder="000.000.000-00"
                   required
                 />
@@ -115,13 +137,24 @@ export default function RegisterPage() {
                   required
                 />
               </div>
+
+              <div className="register-divider"><span>Endereço</span></div>
               <div className="form-group">
-                <label>Endereço</label>
+                <label>CEP</label>
+                <input
+                  type="text"
+                  value={cep}
+                  onChange={(e) => handleCEP(e.target.value)}
+                  placeholder="00000-000"
+                />
+              </div>
+              <div className="form-group">
+                <label>Endereço Completo</label>
                 <input
                   type="text"
                   value={endereco}
                   onChange={(e) => setEndereco(e.target.value)}
-                  placeholder="Rua, número, bairro, cidade"
+                  placeholder="Rua, número, bairro, cidade - UF"
                   required
                 />
               </div>
@@ -129,13 +162,14 @@ export default function RegisterPage() {
           )}
           {tipo === 'AGENTE' && (
             <>
+              <div className="register-divider"><span>Dados da Empresa</span></div>
               <div className="form-group">
                 <label>Razão Social</label>
                 <input
                   type="text"
                   value={razaoSocial}
                   onChange={(e) => setRazaoSocial(e.target.value)}
-                  placeholder="Razão social da empresa"
+                  placeholder="Nome da empresa"
                   required
                 />
               </div>
@@ -144,7 +178,7 @@ export default function RegisterPage() {
                 <input
                   type="text"
                   value={cnpj}
-                  onChange={(e) => setCnpj(e.target.value)}
+                  onChange={(e) => setCnpj(maskCNPJ(e.target.value))}
                   placeholder="00.000.000/0000-00"
                   required
                 />
